@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Student Information</title>
+
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
+</head>
+<body>
+<!-- Navbar -->
+
+	<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" th:href="@{/students}"> <h3 >Thesis Lab Entry System</h3></a>
+			
+			
+		</div>
+		</div>
+	</nav>
+
+
+
+
+
+
+
+	<!-- Navbar -->
+	<main class="my-5">
+
+		<div class="row">
+
+			<div
+				class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+				<h1 class="text-center">Student Information</h1>
+				<div class="card-body">
+					<form th:action="@{/students}" th:object="${student}" method="POST">
+						<div class="form-group">
+							<label> Student ID</label> <input type="text"
+								name="id" th:field="*{id}" class="form-control"
+								placeholder="Enter Student ID" />
+						</div>
+
+						<div class="form-group">
+							<label> Student Name </label> <input type="text"
+								name="name" th:field="*{name}" class="form-control"
+								placeholder="Enter  Name" />
+						</div>
+
+						<div class="form-group">
+							<label> Thesis Supervisor </label> <input type="text" name="subvisorInit"
+								th:field="*{subvisorInit}" class="form-control"
+								placeholder="Thesis supervisor initail" />
+						</div>
+
+						<div class="box-footer">
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</div>
+					</form>
+
+				</div>
+			</div>
+
+
+
+
+		</div>
+
+
+
+
+	</main>
+
+</body>
+</html>
