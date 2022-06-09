@@ -65,7 +65,7 @@ public class StudentServiceImpl implements StudentService {
 
 
 	@Override
-	public Integer getTotalBookedSeatNumber(String exitTime) {
+	public int getTotalBookedSeatNumber(String exitTime) {
 		
 		return studentRepository.getTotalBookedSeatNumber(exitTime);
 	}

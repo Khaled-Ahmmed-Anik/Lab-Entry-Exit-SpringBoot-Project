@@ -2,6 +2,8 @@ package com.khaledahmmedanik.main.service;
 
 import java.util.List;
 
+import org.springframework.ui.Model;
+
 import com.khaledahmmedanik.main.entity.Student;
 
 public interface StudentService {
@@ -20,7 +22,7 @@ public interface StudentService {
 
 
 
-	Integer getTotalBookedSeatNumber(String string);
+	int getTotalBookedSeatNumber(String string);
 
 
 	

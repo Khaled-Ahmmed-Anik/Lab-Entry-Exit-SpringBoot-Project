@@ -16,6 +16,14 @@ import com.khaledahmmedanik.main.service.StudentService;
 public class StudentController {
 
 	private StudentService studentService;
+	
+	private int seatLimit=4;
+	
+	private boolean isEnterAllowd;
+	
+	private String seatStatusMsg;
+	
+	
 
 	public StudentController(StudentService studentService) {
 		super();
@@ -23,9 +31,27 @@ public class StudentController {
 	}
 
 	@GetMapping("/students")
-	public String listStudnets(Model model, Model bookedSeat) {
+	public String seatStatusMsg(Model model,Model seatSatutsMsgInView, Model enterAllowedModel) {
 		model.addAttribute("students", studentService.getAllStudents());
-		bookedSeat.addAttribute("seatBooked", studentService.getTotalBookedSeatNumber(""));
+		
+		int seatBooked=studentService.getTotalBookedSeatNumber("");
+		
+		if (seatBooked==0) {
+			isEnterAllowd=true;
+			seatStatusMsg="Lab is empty now...";
+		}else if(seatBooked==1) {
+			isEnterAllowd=true;
+			seatStatusMsg="Only 1 seat is booked";
+		}else if(seatBooked==seatLimit){
+			isEnterAllowd=false;
+			seatStatusMsg="Sorry, no seats available";
+		}else {
+			isEnterAllowd=true;
+			seatStatusMsg=Integer.toString(seatBooked)+" seats are booked (out of "+Integer.toString(seatLimit)+")";
+		}
+		
+		seatSatutsMsgInView.addAttribute("seatStatusMsg", seatStatusMsg);
+		enterAllowedModel.addAttribute("enterAllowd",isEnterAllowd);
 		
 		return "students";
 	}

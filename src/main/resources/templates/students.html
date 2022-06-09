@@ -36,7 +36,7 @@
 						<li class="nav-item">
 
 							<div class="me-2 px-5">
-								<a class="nav-link" th:href="@{/students/enter}"> <i
+								<a class="nav-link" th:style = "${enterAllowd} ? 'pointer-events: auto' : 'pointer-events: none' " th:href="@{/students/enter}"> <i
 									class="fa-solid fa-person-booth"></i>
 								</a>
 
@@ -63,9 +63,9 @@
 
 	<header class="text-center py-5">
 		<h1>Thesis Lab Entry-Exit List</h1>
-		<h3 class="d-inline" th:text="${seatBooked}">   </h3>
-		<h3 class="d-inline"> seats occupied (Out of 50)</h3>
-
+		
+		<h3 th:text="${seatStatusMsg}"></h3>
+		
 
 	</header>
 
