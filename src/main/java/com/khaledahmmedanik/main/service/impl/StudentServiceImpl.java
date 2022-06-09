@@ -5,7 +5,9 @@ import java.util.List;
 import java.text.SimpleDateFormat;  
 import java.util.Date;
 
+
 import org.springframework.data.annotation.QueryAnnotation;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.khaledahmmedanik.main.entity.Student;
@@ -30,14 +32,13 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	public List<Student> getAllStudents() {
-		
-		return studentRepository.findAll();
+		return studentRepository.findAll(Sort.by(Sort.Direction.DESC, "entryTime"));
 	}
 
 
 	@Override
 	public Student saveStudent(Student student) {
-		SimpleDateFormat formatter = new SimpleDateFormat("HH:mm\ndd/MM/yyyy");  
+		SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");  
 	    Date date = new Date();  
 	    String realTime= formatter.format(date);
 	    student.setEntryTime(realTime);
@@ -61,5 +62,15 @@ public class StudentServiceImpl implements StudentService {
 	    studentRepository.save(existingStudnet);
 	    return null;
 	}
+
+
+	@Override
+	public Integer getTotalBookedSeatNumber(String exitTime) {
+		
+		return studentRepository.getTotalBookedSeatNumber(exitTime);
+	}
+
+
+	
 
 }

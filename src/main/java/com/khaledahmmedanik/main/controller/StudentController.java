@@ -23,8 +23,10 @@ public class StudentController {
 	}
 
 	@GetMapping("/students")
-	public String listStudnets(Model model) {
+	public String listStudnets(Model model, Model bookedSeat) {
 		model.addAttribute("students", studentService.getAllStudents());
+		bookedSeat.addAttribute("seatBooked", studentService.getTotalBookedSeatNumber(""));
+		
 		return "students";
 	}
 
@@ -40,7 +42,7 @@ public class StudentController {
 
 	@PostMapping("/students")
 	public String saveStudent(@ModelAttribute("student") Student student) {
-		System.out.println(student.getId());
+		student.setExitTime("");
 		studentService.saveStudent(student);
 		return "redirect:/students";
 	}
@@ -52,10 +54,9 @@ public class StudentController {
 		
 		studentService.updateLeavingTime(existingStudnet);
 		
-		System.out.println(id);
 		return "redirect:/students";
 	 }
 
-	
+			
 
 }
