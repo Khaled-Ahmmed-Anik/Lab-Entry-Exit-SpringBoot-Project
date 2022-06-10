@@ -38,7 +38,7 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	public Student saveStudent(Student student) {
-		SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");  
+		SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss\ndd/MM/yyyy");  
 	    Date date = new Date();  
 	    String realTime= formatter.format(date);
 	    student.setEntryTime(realTime);
@@ -55,7 +55,7 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	public Student updateLeavingTime(Student existingStudnet) {
-		SimpleDateFormat formatter = new SimpleDateFormat("HH:mm\ndd/MM/yyyy");  
+		SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss\ndd/MM/yyyy");  
 	    Date date = new Date();  
 	    String realTime= formatter.format(date);
 	    existingStudnet.setExitTime(realTime);
@@ -68,6 +68,19 @@ public class StudentServiceImpl implements StudentService {
 	public int getTotalBookedSeatNumber(String exitTime) {
 		
 		return studentRepository.getTotalBookedSeatNumber(exitTime);
+	}
+
+
+	@Override
+	public List<Student> getStudentListById(String id) {
+		return studentRepository.getStudentListById(id);
+	}
+
+
+	@Override
+	public void deleteStudent(String id) {
+		studentRepository.deleteStudent(id);
+		
 	}
 
 

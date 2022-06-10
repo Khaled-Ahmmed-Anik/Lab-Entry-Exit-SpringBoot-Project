@@ -19,8 +19,6 @@
 	margin: 0;
 }
 
-
-
 .float {
 	position: fixed;
 	width: 60px;
@@ -52,15 +50,21 @@
 				<h3>Thesis Lab Entry System</h3>
 			</a>
 
-			<form class="d-flex">
-				<!-- <button class="navbar-toggler" type="button"
+			<!-- 	<form class="d-flex">
+				<button class="navbar-toggler" type="button"
 					data-bs-toggle="collapse" data-bs-target="#mynavbar">
 					<span class="navbar-toggler-icon"></span>
-				</button> -->
-				<!-- <div class="collapse navbar-collapse" id="mynavbar"> -->
+				</button>
+				<div class="collapse navbar-collapse" id="mynavbar">
 					
 					<input class="form-control me-2" type="text" placeholder="Enter your ID">
 					<button class="btn btn-dark" type="button">Search</button>
+			</form> -->
+			<form class="d-flex" action="/searchAction" method="post">
+
+				<input class="form-control me-2" type="text"
+					placeholder="Enter your ID" name="id">
+				<button class="btn btn-dark" type="submit">Search</button>
 			</form>
 		</div>
 		<!-- </div> -->
@@ -92,33 +96,36 @@
 						<th>ID</th>
 						<th>Name</th>
 						<th>Supervisor</th>
-						<th>Enter at</th>
-						<th>Leave at</th>
-						<th>Actions</th>
+						<th class="text-center">Enter at</th>
+						<th class="text-center">Leave at</th>
+						<th class="text-center">Actions</th>
 
 					</tr>
 				</thead>
 
 				<tbody>
-					<tr th:each="student: ${students}">
-						<td th:text="${student.id}"></td>
-						<td th:text="${student.name}"></td>
-						<td th:text="${student.subvisorInit}"></td>
-						<td th:text="${student.entryTime}"></td>
-						<td th:text="${student.exitTime}"></td>
+					<tr th:each="student: ${students} " >
+						<td th:text="${student.id}"  class="align-middle"></td>
+						<td th:text="${student.name}" class="align-middle"></td>
+						<td th:text="${student.subvisorInit}" class="align-middle"></td>
+						<td th:text="${student.entryTime}" style="white-space: pre-line" class="align-middle text-center"></td>
+						<td th:text="${student.exitTime}" style="white-space: pre-line" class="align-middle text-center"></td>
 
 
-						<td><a th:href="@{/students/edid/{id}(id=${student.id})}"
-							class="btn btn-primary"><i class="fa-solid fa-file-pen"></i></a>
-
-							<!-- <form class="d-inline "action="#" th:method="put"
-								th:action="@{/students/{id}(id=${student.id})}">
-								<a type="submit"
-									class="btn btn-primary"> <i
-									class="fa-solid fa-person-through-window"></i></a>
-							</form> --> <a th:href="@{/students/{id}(id=${student.id})}"
+						<td class="align-middle text-center">
+						
+							
+							 <a th:href="@{/students/{id}(id=${student.id})}"
 							class="btn btn-primary"> <i
-								class="fa-solid fa-person-through-window"></i></a></td>
+								class="fa-solid fa-person-through-window"></i></a>
+								
+								
+								<a th:href="@{/students/delete/{id}(id=${student.id})}"
+							class="btn btn-primary"><i class="fa-solid fa-trash"></i></a>
+								
+								
+								
+								</td>
 					</tr>
 
 
@@ -133,17 +140,24 @@
 
 	</main>
 
-	
+	<br>
+	<br>
 
 
-	
 
-	<!-- Code begins here -->
+
+
 	<a class="float "
-									th:style="${enterAllowd} ? 'pointer-events: auto' : 'pointer-events: none' "
-									th:href="@{/students/enter}"> <i
-									class="fa-solid fa-person-booth my-float"></i>
-								</a>
+		th:style="${enterAllowd} ? 'pointer-events: auto' : 'pointer-events: none' "
+		th:href="@{/students/enter}"> <i
+		class="fa-solid fa-person-booth my-float"></i>
+	</a>
+
+
+
+
+
+
 
 
 </body>

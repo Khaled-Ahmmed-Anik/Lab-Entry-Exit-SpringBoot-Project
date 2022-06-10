@@ -20,5 +20,11 @@ public interface StudentRepository extends MongoRepository<Student, String>{
 	 @Query(value ="{exitTime: ?0}", count=true)
      Integer getTotalBookedSeatNumber(String exitTime);
 
+	 @Query("{id :?0}")                                                  //SQL Equivalent : SELECT * FROM BOOK WHERE ID=?
+     List<Student> getStudentListById(String id);
 
+
+
+	 @Query(value="{'id' : ?0}", delete = true)
+	 void deleteStudent(String id);
 }

@@ -25,6 +25,12 @@ public interface StudentService {
 	int getTotalBookedSeatNumber(String string);
 
 
+	List<Student> getStudentListById(String id);
+
+
+	void deleteStudent(String id);
+
+
 	
 	
 }
