@@ -17,17 +17,6 @@ public class ThesisLabEntryProjectApplication {
 		SpringApplication.run(ThesisLabEntryProjectApplication.class, args);
 	}
 
-//	@Autowired
-////	private StudentRepository studentReposiory;
-//
-//	@Override
-//	public void run(String... args) throws Exception {
-//		// TODO Auto-generated method stub
-////		studentReposiory.saveAll(Arrays.asList(
-////				new Student("212","anik","dsfsdf","fdsfds","fsdf"), 
-////				new Student("213","anik","dsfsdf","fdsfds","fsdf"), 
-////				new Student("214","anik","dsfsdf","fdsfds","fsdf"), 
-////				new Student("215","anik","dsfsdf","fdsfds","fsdf")));
-//	}
+
 
 }

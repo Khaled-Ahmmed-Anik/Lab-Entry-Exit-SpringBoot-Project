@@ -31,6 +31,8 @@ public class StudentController {
 	private List<Student> searchResult;
 	private Student notFound=new Student();
 	
+	private char[] charCheckArray = {'0', '3', '4', '5', '6', '7', '8', '9'};
+	
 	
 	
 
@@ -81,21 +83,71 @@ public class StudentController {
 	}
 
 	@PostMapping("/students")
-	public String saveStudent(@ModelAttribute("student") Student student,Model model) {
+	public String saveStudent(@ModelAttribute("student") Student student,Model model,Model Msg) {
 		
 		
 		Student checkStudent=studentService.getStudentById(student.getId());
+		String givenId=student.getId();
+		String givenName=student.getName();
+		String givenSup=student.getSubvisorInit();
 		
-		if(checkStudent == null) {
+		boolean isOk=checkIdNameSup(givenId,givenName,givenSup);
+		if(checkStudent == null && isOk) {
 			student.setExitTime("");
 			
 			studentService.saveStudent(student);
 			return "redirect:/students";
 		}
 		
+		
+		
+
+		
+		
 		model.addAttribute("isExit", true);
+		if(!isOk) {
+			Msg.addAttribute("show", "Please, enter correct value in all fields");
+		}else {
+			Msg.addAttribute("show", "This Student is already in Lab");
+		}
+		
 		
 		return "enterNewStudent";
+	}
+
+	private boolean checkIdNameSup(String givenId, String givenName, String givenSup) {
+		int givenIdLen=givenId.length();
+		
+		if(givenIdLen!=8)return false;
+		System.out.println(122);
+		for(int i=0; i < givenIdLen; i++) {
+			 char value=givenId.charAt(i);
+	         Boolean flag = Character.isDigit(value);
+	         System.out.println(flag + "      "+value+"           "+126);
+	         if(flag) {
+	            
+	         }else {
+	        	 return false;
+	         }
+	        
+	         if (i==0) {
+	        	 for(int j=0;j<charCheckArray.length;j++) {
+	 	 			if(charCheckArray[j]==value)return false;
+	 	 		 }
+	         }
+		}
+		
+		 System.out.println(136);
+		//id done;
+		
+		int givenNameLen=givenName.length();
+		if(givenNameLen==0)return false;
+		
+		 System.out.println(142);
+		int givenSupLen=givenSup.length();
+		if(givenSupLen!=3)return false;
+		 System.out.println(145);
+		return true;
 	}
 
 	@GetMapping( "/students/{id}") 
