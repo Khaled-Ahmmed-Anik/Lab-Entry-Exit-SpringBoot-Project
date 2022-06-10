@@ -19,13 +19,21 @@
 	margin: 0;
 }
 
+body {
+    background: #141E30;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: #fff;
+}
+
+
 .float {
 	position: fixed;
 	width: 60px;
 	height: 60px;
 	bottom: 40px;
 	right: 40px;
-	background-color: #0C9;
+	/* background-color: #0C9; */
 	color: #FFF;
 	border-radius: 50px;
 	text-align: center;
@@ -35,6 +43,42 @@
 .my-float {
 	margin-top: 22px;
 }
+
+.btn-circle {
+  width: 45px;
+  height: 45px;
+  line-height: 45px;
+  text-align: center;
+  padding: 0;
+  border-radius: 50%;
+}
+
+.btn-circle i {
+  position: relative;
+  top: -1px;
+}
+
+.btn-circle-sm {
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  font-size: 0.9rem;
+}
+
+
+.btn-cool-blues {
+    background: #2193b0;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #6dd5ed, #2193b0);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #6dd5ed, #2193b0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: #fff;
+    border: 3px solid #eee;
+}
+
+
+.btn-rounded {
+    border-radius: 35px;
+}
+
 </style>
 
 
@@ -44,9 +88,9 @@
 
 	<!-- Navbar -->
 
-	<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="#">
+	<nav class="navbar navbar-expand-sm navbar-dark bg-dark align-middle">
+		<div class="container-fluid align-middle">
+			<a class="navbar-brand" th:href="@{/students}">
 				<h3>Thesis Lab Entry System</h3>
 			</a>
 
@@ -60,11 +104,11 @@
 					<input class="form-control me-2" type="text" placeholder="Enter your ID">
 					<button class="btn btn-dark" type="button">Search</button>
 			</form> -->
-			<form class="d-flex" action="/searchAction" method="post">
+			<form class="d-flex align-middle" action="/searchAction" method="post">
 
 				<input class="form-control me-2" type="text"
 					placeholder="Enter your ID" name="id">
-				<button class="btn btn-dark" type="submit">Search</button>
+				<button class="btn btn-info btn-circle btn-circle-sm m-1 " type="submit"><i class="fa fa-search"></i></button>
 			</form>
 		</div>
 		<!-- </div> -->
@@ -81,7 +125,7 @@
 	<header class="text-center py-5">
 		<h1>Thesis Lab Entry-Exit List</h1>
 
-		<h3 th:text="${seatStatusMsg}"></h3>
+		<h3 style ="color: white;" th:styleappend = "${isEmpty==true} ? 'color: green'  "  th:text="${seatStatusMsg}"></h3>
 
 
 	</header>
@@ -95,7 +139,7 @@
 					<tr>
 						<th>ID</th>
 						<th>Name</th>
-						<th>Supervisor</th>
+						<th class="text-center">Supervisor </th>
 						<th class="text-center">Enter at</th>
 						<th class="text-center">Leave at</th>
 						<th class="text-center">Actions</th>
@@ -103,11 +147,11 @@
 					</tr>
 				</thead>
 
-				<tbody>
-					<tr th:each="student: ${students} " >
+				<tbody style ="color: white;">
+					<tr  th:each="student: ${students} " >
 						<td th:text="${student.id}"  class="align-middle"></td>
 						<td th:text="${student.name}" class="align-middle"></td>
-						<td th:text="${student.subvisorInit}" class="align-middle"></td>
+						<td th:text="${student.subvisorInit}" class="align-middle text-center"></td>
 						<td th:text="${student.entryTime}" style="white-space: pre-line" class="align-middle text-center"></td>
 						<td th:text="${student.exitTime}" style="white-space: pre-line" class="align-middle text-center"></td>
 
@@ -115,14 +159,12 @@
 						<td class="align-middle text-center">
 						
 							
-							 <a th:href="@{/students/{id}(id=${student.id})}"
-							class="btn btn-primary"> <i
-								class="fa-solid fa-person-through-window"></i></a>
+							 <a th:style = "${student.isIn} ? 'visibility: visible' : 'visibility: hidden' " th:href="@{/students/{id}(id=${student.id})}"
+							class="btn  btn-cool-blues">Leave </a>
 								
 								
-								<a th:href="@{/students/delete/{id}(id=${student.id})}"
-							class="btn btn-primary"><i class="fa-solid fa-trash"></i></a>
-								
+							<a th:href="@{/students/delete/{id}(id=${student.id})}"
+							class="btn btn-cool-blues">Delete</a>
 								
 								
 								</td>
@@ -147,10 +189,10 @@
 
 
 
-	<a class="float "
+	<a class="float btn-info btn-cool-blues"
 		th:style="${enterAllowd} ? 'pointer-events: auto' : 'pointer-events: none' "
 		th:href="@{/students/enter}"> <i
-		class="fa-solid fa-person-booth my-float"></i>
+		class="fa-solid fa-user-plus my-float"></i>
 	</a>
 
 

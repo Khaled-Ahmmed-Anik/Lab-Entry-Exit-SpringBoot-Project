@@ -30,5 +30,7 @@ public class Student {
 	private String entryTime;
 	
 	private String exitTime;
+	
+	private boolean isIn;
 
 }

@@ -42,6 +42,7 @@ public class StudentServiceImpl implements StudentService {
 	    Date date = new Date();  
 	    String realTime= formatter.format(date);
 	    student.setEntryTime(realTime);
+	    student.setIn(true);
 		return studentRepository.save(student);
 	}
 
@@ -59,6 +60,7 @@ public class StudentServiceImpl implements StudentService {
 	    Date date = new Date();  
 	    String realTime= formatter.format(date);
 	    existingStudnet.setExitTime(realTime);
+	    existingStudnet.setIn(false);
 	    studentRepository.save(existingStudnet);
 	    return null;
 	}

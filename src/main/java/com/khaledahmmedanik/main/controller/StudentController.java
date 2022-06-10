@@ -41,7 +41,7 @@ public class StudentController {
 	}
 
 	@GetMapping("/students")
-	public String seatStatusMsg(Model model,Model seatSatutsMsgInView, Model enterAllowedModel) {
+	public String seatStatusMsg(Model model,Model seatSatutsMsgInView, Model enterAllowedModel,Model seatStatusMsgColor) {
 		model.addAttribute("students", studentsPageListContent());
 		
 		int seatBooked=studentService.getTotalBookedSeatNumber("");
@@ -49,16 +49,20 @@ public class StudentController {
 		if (seatBooked==0) {
 			isEnterAllowd=true;
 			seatStatusMsg="Lab is empty now...";
+			seatStatusMsgColor.addAttribute("isEmpty", true);
+			
 		}else if(seatBooked==1) {
 			isEnterAllowd=true;
 			seatStatusMsg="Only 1 seat is booked";
 		}else if(seatBooked==seatLimit){
 			isEnterAllowd=false;
 			seatStatusMsg="Sorry, no seats available";
+			seatStatusMsgColor.addAttribute("isFull", true);
 		}else {
 			isEnterAllowd=true;
 			seatStatusMsg=Integer.toString(seatBooked)+" seats are booked (out of "+Integer.toString(seatLimit)+")";
 		}
+		
 		
 		seatSatutsMsgInView.addAttribute("seatStatusMsg", seatStatusMsg);
 		enterAllowedModel.addAttribute("enterAllowd",isEnterAllowd);
@@ -77,10 +81,21 @@ public class StudentController {
 	}
 
 	@PostMapping("/students")
-	public String saveStudent(@ModelAttribute("student") Student student) {
-		student.setExitTime("");
-		studentService.saveStudent(student);
-		return "redirect:/students";
+	public String saveStudent(@ModelAttribute("student") Student student,Model model) {
+		
+		
+		Student checkStudent=studentService.getStudentById(student.getId());
+		
+		if(checkStudent == null) {
+			student.setExitTime("");
+			
+			studentService.saveStudent(student);
+			return "redirect:/students";
+		}
+		
+		model.addAttribute("isExit", true);
+		
+		return "enterNewStudent";
 	}
 
 	@GetMapping( "/students/{id}") 
