@@ -119,11 +119,9 @@ public class StudentController {
 		int givenIdLen=givenId.length();
 		
 		if(givenIdLen!=8)return false;
-		System.out.println(122);
 		for(int i=0; i < givenIdLen; i++) {
 			 char value=givenId.charAt(i);
 	         Boolean flag = Character.isDigit(value);
-	         System.out.println(flag + "      "+value+"           "+126);
 	         if(flag) {
 	            
 	         }else {
@@ -137,16 +135,13 @@ public class StudentController {
 	         }
 		}
 		
-		 System.out.println(136);
 		//id done;
 		
 		int givenNameLen=givenName.length();
 		if(givenNameLen==0)return false;
 		
-		 System.out.println(142);
 		int givenSupLen=givenSup.length();
 		if(givenSupLen!=3)return false;
-		 System.out.println(145);
 		return true;
 	}
 
@@ -186,7 +181,7 @@ public class StudentController {
 	
 	@GetMapping( "/students/delete/{id}") 
 	public String deleteStudent(@PathVariable String id) { 
-		System.out.println(id);
+		
 		studentService.deleteStudent(id);
 		
 		return "redirect:/students";
