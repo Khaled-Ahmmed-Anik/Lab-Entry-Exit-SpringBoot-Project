@@ -99,7 +99,7 @@ public class StudentController {
 		String givenSup=student.getSubvisorInit();
 		
 		boolean isOk=checkIdNameSup(givenId,givenName,givenSup);
-		if(checkStudent == null && isOk) {
+		if((checkStudent==null || !checkStudent.getExitTime().equals("")) && isOk) {
 			student.setExitTime("");
 			student.setStudent(true);
 			studentService.saveStudent(student);
