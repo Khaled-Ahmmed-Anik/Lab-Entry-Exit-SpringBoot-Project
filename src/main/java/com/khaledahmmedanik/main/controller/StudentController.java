@@ -23,7 +23,7 @@ public class StudentController {
 
 	private StudentService studentService;
 	
-	private int seatLimit=4;
+	private int seatLimit;
 	
 	private boolean isEnterAllowd;
 	
@@ -46,6 +46,7 @@ public class StudentController {
 		notFound.setId("Not Found");
 		this.studentService = studentService;
 		adminInfo=studentService.getAdminInfo("administrativeInfo");
+		seatLimit=adminInfo.getSeatLimit();
 	}
 
 	@GetMapping("/students")
@@ -174,12 +175,12 @@ public class StudentController {
 		
 		
 		//administrativeInfo
-		System.out.println(adminInfo.getPassword());
-		System.out.println(password);
+		/*
+		 * System.out.println(adminInfo.getPassword()); System.out.println(password);
+		 */
 		
 		if(password.equals(adminInfo.getPassword())) {
 			 studentService.deleteAllStudent(true);
-			
 		}
 		
 		
