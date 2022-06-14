@@ -10,6 +10,7 @@ import org.springframework.data.annotation.QueryAnnotation;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.khaledahmmedanik.main.entity.Admin;
 import com.khaledahmmedanik.main.entity.Student;
 import com.khaledahmmedanik.main.repository.StudentRepository;
 import com.khaledahmmedanik.main.service.StudentService;
@@ -32,7 +33,9 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	public List<Student> getAllStudents() {
-		return studentRepository.findAll(Sort.by(Sort.Direction.DESC, "entryTime"));
+		return studentRepository.getAllStudent(true);
+				
+			//	.by(Sort.Direction.DESC, "entryTime"));
 	}
 
 
@@ -84,6 +87,23 @@ public class StudentServiceImpl implements StudentService {
 		studentRepository.deleteStudent(id);
 		
 	}
+
+
+	@Override
+	public Admin getAdminInfo(String id) {
+		// TODO Auto-generated method stub
+		return studentRepository.getAdminInfo(id);
+		
+	}
+
+
+	@Override
+	public void deleteAllStudent(boolean b) {
+		studentRepository.deleteAllStudent(b);
+		
+	}
+
+
 
 
 	

@@ -20,14 +20,15 @@
 }
 
 body {
-    background: #141E30;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    color: #fff;
+	background: #141E30; /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #243B55, #141E30);
+	/* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #243B55, #141E30);
+	/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	color: #fff;
 }
 
-
-.float {
+.righFloat {
 	position: fixed;
 	width: 60px;
 	height: 60px;
@@ -40,45 +41,57 @@ body {
 	box-shadow: 2px 2px 3px #999;
 }
 
+.leftFloat {
+	position: fixed;
+	width: 60px;
+	height: 60px;
+	bottom: 40px;
+	left: 40px;
+	/* background-color: #0C9; */
+	color: #FFF;
+	border-radius: 50px;
+	text-align: center;
+	box-shadow: 2px 2px 3px #999;
+}
+
 .my-float {
 	margin-top: 22px;
 }
 
 .btn-circle {
-  width: 45px;
-  height: 45px;
-  line-height: 45px;
-  text-align: center;
-  padding: 0;
-  border-radius: 50%;
+	width: 45px;
+	height: 45px;
+	line-height: 45px;
+	text-align: center;
+	padding: 0;
+	border-radius: 50%;
 }
 
 .btn-circle i {
-  position: relative;
-  top: -1px;
+	position: relative;
+	top: -1px;
 }
 
 .btn-circle-sm {
-  width: 35px;
-  height: 35px;
-  line-height: 35px;
-  font-size: 0.9rem;
+	width: 35px;
+	height: 35px;
+	line-height: 35px;
+	font-size: 0.9rem;
 }
-
 
 .btn-cool-blues {
-    background: #2193b0;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #6dd5ed, #2193b0);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #6dd5ed, #2193b0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    color: #fff;
-    border: 3px solid #eee;
+	background: #2193b0; /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #6dd5ed, #2193b0);
+	/* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #6dd5ed, #2193b0);
+	/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	color: #fff;
+	border: 3px solid #eee;
 }
-
 
 .btn-rounded {
-    border-radius: 35px;
+	border-radius: 35px;
 }
-
 </style>
 
 
@@ -104,11 +117,15 @@ body {
 					<input class="form-control me-2" type="text" placeholder="Enter your ID">
 					<button class="btn btn-dark" type="button">Search</button>
 			</form> -->
-			<form class="d-flex align-middle" action="/searchAction" method="post">
+			<form class="d-flex align-middle" action="/searchAction"
+				method="post">
 
 				<input class="form-control me-2" type="text"
 					placeholder="Enter your ID" name="id">
-				<button class="btn btn-info btn-circle btn-circle-sm m-1 " type="submit"><i class="fa fa-search"></i></button>
+				<button class="btn btn-info btn-circle btn-circle-sm m-1 "
+					type="submit">
+					<i class="fa fa-search"></i>
+				</button>
 			</form>
 		</div>
 		<!-- </div> -->
@@ -125,7 +142,9 @@ body {
 	<header class="text-center py-5">
 		<h1>Thesis Lab Entry-Exit List</h1>
 
-		<h3 style ="color: white;" th:styleappend = "${isEmpty==true} ? 'color: green'  "  th:text="${seatStatusMsg}"></h3>
+		<h3 style="color: white;"
+			th:styleappend="${isEmpty==true} ? 'color: green'  "
+			th:text="${seatStatusMsg}"></h3>
 
 
 	</header>
@@ -139,7 +158,7 @@ body {
 					<tr>
 						<th>ID</th>
 						<th>Name</th>
-						<th class="text-center">Supervisor </th>
+						<th class="text-center">Supervisor</th>
 						<th class="text-center">Enter at</th>
 						<th class="text-center">Leave at</th>
 						<th class="text-center">Actions</th>
@@ -147,27 +166,24 @@ body {
 					</tr>
 				</thead>
 
-				<tbody style ="color: white;">
-					<tr  th:each="student: ${students} " >
-						<td th:text="${student.id}"  class="align-middle"></td>
+				<tbody style="color: white;">
+					<tr th:each="student: ${students} ">
+						<td th:text="${student.id}" class="align-middle"></td>
 						<td th:text="${student.name}" class="align-middle"></td>
-						<td th:text="${student.subvisorInit}" class="align-middle text-center"></td>
-						<td th:text="${student.entryTime}" style="white-space: pre-line" class="align-middle text-center"></td>
-						<td th:text="${student.exitTime}" style="white-space: pre-line" class="align-middle text-center"></td>
+						<td th:text="${student.subvisorInit}"
+							class="align-middle text-center"></td>
+						<td th:text="${student.entryTime}" style="white-space: pre-line"
+							class="align-middle text-center"></td>
+						<td th:text="${student.exitTime}" style="white-space: pre-line"
+							class="align-middle text-center"></td>
 
 
-						<td class="align-middle text-center">
-						
-							
-							 <a th:style = "${student.isIn} ? 'visibility: visible' : 'visibility: hidden' " th:href="@{/students/{id}(id=${student.id})}"
-							class="btn  btn-cool-blues">Leave </a>
-								
-								
-							<a th:href="@{/students/delete/{id}(id=${student.id})}"
-							class="btn btn-cool-blues">Delete</a>
-								
-								
-								</td>
+						<td class="align-middle text-center"><a
+							th:style="${student.isIn} ? 'visibility: visible' : 'visibility: hidden' "
+							th:href="@{/students/{id}(id=${student.id})}"
+							class="btn  btn-cool-blues">Leave </a> <a
+							th:href="@{/students/delete/{id}(id=${student.id})}"
+							class="btn btn-cool-blues">Delete</a></td>
 					</tr>
 
 
@@ -189,7 +205,7 @@ body {
 
 
 
-	<a class="float btn-info btn-cool-blues"
+	<a class="righFloat btn-info btn-cool-blues"
 		th:style="${enterAllowd} ? 'pointer-events: auto' : 'pointer-events: none' "
 		th:href="@{/students/enter}"> <i
 		class="fa-solid fa-user-plus my-float"></i>
@@ -199,7 +215,53 @@ body {
 
 
 
+	<!-- Button trigger modal -->
+	<a class="leftFloat btn-info btn-cool-blues" type="button"
+		data-bs-toggle="modal" data-bs-target="#exampleModal"> <i
+		class="fa-solid fa-trash-can my-float"></i></i>
+	</a>
 
+	<!-- Modal -->
+	<div style="color: black" class="modal fade" id="exampleModal"
+		tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 style="color: red" class="modal-title" id="exampleModalLabel">Delete All</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<form class="align-middle" action="/deleteAll"
+						method="post">
+				<div class="modal-body">
+					<!-- th:action="@{/students/deleteAll}" th:object="${student}" method="POST" -->
+						
+						<h5>Are you sure about delete all?<br>If yes, please enter the admin password:</h5>
+						<input class="form-control me-2" type="password"
+							placeholder="Enter admin password" name="password">
+						
+						<br>
+					
+					
+				</div>
+				<div class="modal-footer">
+
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-cool-blues">Delete all</button>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
+		integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
+		crossorigin="anonymous"></script>
 
 
 </body>

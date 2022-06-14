@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.ui.Model;
 
+import com.khaledahmmedanik.main.entity.Admin;
 import com.khaledahmmedanik.main.entity.Student;
 
 public interface StudentService {
@@ -29,6 +30,18 @@ public interface StudentService {
 
 
 	void deleteStudent(String id);
+
+
+	Admin getAdminInfo(String string);
+
+
+	
+
+
+	void deleteAllStudent(boolean b);
+
+
+	
 
 
 	

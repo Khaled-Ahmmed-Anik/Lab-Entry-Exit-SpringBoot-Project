@@ -1,6 +1,8 @@
 package com.khaledahmmedanik.main.controller;
 
+import java.lang.StackWalker.Option;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.khaledahmmedanik.main.entity.Admin;
 import com.khaledahmmedanik.main.entity.Student;
 import com.khaledahmmedanik.main.service.StudentService;
 
@@ -31,15 +34,18 @@ public class StudentController {
 	private List<Student> searchResult;
 	private Student notFound=new Student();
 	
-	private char[] charCheckArray = {'0', '3', '4', '5', '6', '7', '8', '9'};
+	private Admin adminInfo;
+	
 	
 	
 	
 
 	public StudentController(StudentService studentService) {
 		super();
+		
 		notFound.setId("Not Found");
 		this.studentService = studentService;
+		adminInfo=studentService.getAdminInfo("administrativeInfo");
 	}
 
 	@GetMapping("/students")
@@ -94,7 +100,7 @@ public class StudentController {
 		boolean isOk=checkIdNameSup(givenId,givenName,givenSup);
 		if(checkStudent == null && isOk) {
 			student.setExitTime("");
-			
+			student.setStudent(true);
 			studentService.saveStudent(student);
 			return "redirect:/students";
 		}
@@ -129,9 +135,7 @@ public class StudentController {
 	         }
 	        
 	         if (i==0) {
-	        	 for(int j=0;j<charCheckArray.length;j++) {
-	 	 			if(charCheckArray[j]==value)return false;
-	 	 		 }
+	        	 if(value!='1' && value!='2')return false;
 	         }
 		}
 		
@@ -163,6 +167,24 @@ public class StudentController {
 		return "redirect:/students";
 	}
 
+	
+	@PostMapping("/deleteAll")
+	public String deleteAllStudnet(@RequestParam("password") String password ) {
+		
+		
+		
+		//administrativeInfo
+		System.out.println(adminInfo.getPassword());
+		System.out.println(password);
+		
+		if(password.equals(adminInfo.getPassword())) {
+			 studentService.deleteAllStudent(true);
+			
+		}
+		
+		
+		return "redirect:/students";
+	}
 	
 	
 	

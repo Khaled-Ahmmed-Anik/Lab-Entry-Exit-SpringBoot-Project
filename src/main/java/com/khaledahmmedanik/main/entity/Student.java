@@ -32,5 +32,7 @@ public class Student {
 	private String exitTime;
 	
 	private boolean isIn;
+	
+	private boolean isStudent;
 
 }
