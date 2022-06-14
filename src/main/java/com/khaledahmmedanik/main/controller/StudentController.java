@@ -34,6 +34,8 @@ public class StudentController {
 	private List<Student> searchResult;
 	private Student notFound=new Student();
 	
+	private Student studentObj;
+	
 	private Admin adminInfo;
 	
 	
@@ -204,8 +206,11 @@ public class StudentController {
 	
 	@GetMapping( "/students/delete/{id}") 
 	public String deleteStudent(@PathVariable String id) { 
+		studentObj=studentService.getStudentById(id);
 		
-		studentService.deleteStudent(id);
+		if(!studentObj.getExitTime().equals("")) {
+			studentService.deleteStudent(id);
+		}
 		
 		return "redirect:/students";
 	 }
