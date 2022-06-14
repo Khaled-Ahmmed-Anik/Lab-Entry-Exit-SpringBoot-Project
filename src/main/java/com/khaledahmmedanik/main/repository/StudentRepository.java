@@ -38,5 +38,8 @@ public interface StudentRepository extends MongoRepository<Student, String>{
 
 	 @Query("{isStudent :?0}") 
 	 List<Student> getAllStudent(boolean b);
+	 
+	 @Query(value ="{isStudent: ?0}", count=true)
+     Integer getTotalStudentsInList(boolean b);
 
 }

@@ -21,7 +21,7 @@ public interface StudentService {
 	Student updateLeavingTime(Student existingStudnet);
 
 
-
+	int getTotalStudentsInList(boolean b);
 
 	int getTotalBookedSeatNumber(String string);
 

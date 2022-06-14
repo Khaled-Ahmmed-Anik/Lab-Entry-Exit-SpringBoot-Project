@@ -32,8 +32,8 @@ body {
 	position: fixed;
 	width: 60px;
 	height: 60px;
-	bottom: 40px;
-	right: 40px;
+	bottom: 20px;
+	right: 20px;
 	/* background-color: #0C9; */
 	color: #FFF;
 	border-radius: 50px;
@@ -45,8 +45,8 @@ body {
 	position: fixed;
 	width: 60px;
 	height: 60px;
-	bottom: 40px;
-	left: 40px;
+	bottom: 20px;
+	left: 20px;
 	/* background-color: #0C9; */
 	color: #FFF;
 	border-radius: 50px;
@@ -217,6 +217,7 @@ body {
 
 	<!-- Button trigger modal -->
 	<a class="leftFloat btn-info btn-cool-blues" type="button"
+	th:style="${deleteAllowd} ? 'pointer-events: auto' : 'pointer-events: none' "
 		data-bs-toggle="modal" data-bs-target="#exampleModal"> <i
 		class="fa-solid fa-trash-can my-float"></i></i>
 	</a>

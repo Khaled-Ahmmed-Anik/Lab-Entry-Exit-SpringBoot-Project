@@ -52,11 +52,24 @@ public class StudentController {
 	}
 
 	@GetMapping("/students")
-	public String seatStatusMsg(Model model,Model seatSatutsMsgInView, Model enterAllowedModel,Model seatStatusMsgColor) {
+	public String seatStatusMsg(Model model,
+			Model seatSatutsMsgInView, 
+			Model enterAllowedModel,
+			Model seatStatusMsgColor,
+			
+			Model deleteAllowedPass) {
+		
 		model.addAttribute("students", studentsPageListContent());
 		
 		int seatBooked=studentService.getTotalBookedSeatNumber("");
 		
+		if(studentService.getTotalStudentsInList(true)==0) {
+			deleteAllowedPass.addAttribute("deleteAllowd", false);
+		}else {
+			deleteAllowedPass.addAttribute("deleteAllowd", true);
+		}
+		
+		//getTotalStudentsInList(boolean b);
 		if (seatBooked==0) {
 			isEnterAllowd=true;
 			seatStatusMsg="Lab is empty now...";

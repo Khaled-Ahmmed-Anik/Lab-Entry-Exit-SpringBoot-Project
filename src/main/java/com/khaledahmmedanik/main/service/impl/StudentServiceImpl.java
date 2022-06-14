@@ -2,7 +2,8 @@ package com.khaledahmmedanik.main.service.impl;
 
 import java.util.List;
 
-import java.text.SimpleDateFormat;  
+import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 
 
@@ -30,10 +31,18 @@ public class StudentServiceImpl implements StudentService {
 		this.studentRepository = studentRepository;
 	}
 
+	public List<Student> reverse(List<Student> list1) {
+		for(int i = 0; i < list1.size(); i += 1) {
+		    list1.add(i, list1.get(list1.size() - 1));
+		    list1.remove(list1.size() - 1);
+		}
+		return list1;
+	   }
 
 	@Override
 	public List<Student> getAllStudents() {
-		return studentRepository.getAllStudent(true);
+		List<Student> gotList=studentRepository.getAllStudent(true);
+		return reverse(gotList);
 				
 			//	.by(Sort.Direction.DESC, "entryTime"));
 	}
@@ -101,6 +110,12 @@ public class StudentServiceImpl implements StudentService {
 	public void deleteAllStudent(boolean b) {
 		studentRepository.deleteAllStudent(b);
 		
+	}
+
+
+	@Override
+	public int getTotalStudentsInList(boolean b) {
+		return studentRepository.getTotalStudentsInList( b);
 	}
 
 
