@@ -2,8 +2,6 @@ package com.khaledahmmedanik.main.service;
 
 import java.util.List;
 
-import org.springframework.ui.Model;
-
 import com.khaledahmmedanik.main.entity.Admin;
 import com.khaledahmmedanik.main.entity.Student;
 

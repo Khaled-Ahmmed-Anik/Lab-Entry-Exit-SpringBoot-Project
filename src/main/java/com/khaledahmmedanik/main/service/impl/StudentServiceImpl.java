@@ -3,12 +3,9 @@ package com.khaledahmmedanik.main.service.impl;
 import java.util.List;
 
 import java.text.SimpleDateFormat;
-import java.util.Collections;
 import java.util.Date;
 
 
-import org.springframework.data.annotation.QueryAnnotation;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.khaledahmmedanik.main.entity.Admin;
