@@ -7,15 +7,17 @@ import com.mongodb.lang.NonNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 
 
 @Data
-@NoArgsConstructor
-@RequiredArgsConstructor
+@Setter
+@Getter
 @AllArgsConstructor
+@NoArgsConstructor
 @Document
 public class Student {
 	
